@@ -20,6 +20,10 @@ class HiveFunctions {
     return notes;
   }
 
+  NoteModel? getNoteByTitle(String title) {
+    return noteBox.get(title);
+  }
+
   List<NoteModel> getNotesFromArchive() {
     List<NoteModel> notes = [];
     for (NoteModel note in archiveBox.values) {

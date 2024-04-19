@@ -33,6 +33,7 @@ class AddingScreen extends ConsumerWidget {
             ),
             TextField(
               controller: bodyController,
+              maxLines: null,
               decoration: const InputDecoration(
                   labelText: 'Treść', border: OutlineInputBorder()),
             ),
@@ -54,12 +55,6 @@ class AddingScreen extends ConsumerWidget {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.goNamed(AppRoute.archive.name);
-        },
-        child: const Icon(Icons.storage),
       ),
     );
   }

@@ -9,14 +9,26 @@ class Note extends StateNotifier<List<NoteModel>> {
         );
   final HiveFunctions hiveFunctions;
 
+  void showNotes() {
+    state = hiveFunctions.getNotes();
+  }
+
+  void addFromArchiveToMain(NoteModel note) {
+    // Koniecznie trzeba stworzyć nowy obiekt, w przeciwnym wypadku będzie
+    // HiveError: The same instance of an HiveObject cannot be stored in two different boxes.
+    final newNote = NoteModel(title: note.title, body: note.body);
+    hiveFunctions.addNote(newNote);
+    state = hiveFunctions.getNotes();
+  }
+
   void deleteNoteFromMain(NoteModel note) {
     hiveFunctions.deleteNote(note);
     hiveFunctions.addNoteToArchive(note);
     state = hiveFunctions.getNotes();
   }
 
-  void deleteNoteFromArchive(NoteModel note) {
-    hiveFunctions.deleteNoteFromArchive(note);
+  NoteModel? getNoteByTitle(String title) {
+    return hiveFunctions.getNoteByTitle(title);
   }
 
   void addNote(NoteModel note) {
@@ -24,18 +36,9 @@ class Note extends StateNotifier<List<NoteModel>> {
     state = hiveFunctions.getNotes();
   }
 
-  void addFromArchiveToMain(NoteModel note) {
-    hiveFunctions.addNote(note);
-    // state = hiveFunctions.getNotes();
-  }
-
   void deleteMainBox() {
     hiveFunctions.clearMainBox();
     state = hiveFunctions.getNotes();
-  }
-
-  void deleteArchiveBox() {
-    hiveFunctions.clearArchiveBox();
   }
 }
 

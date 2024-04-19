@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:second_memory/src/features/archive/archive_provider/archive_provider.dart';
 import 'package:second_memory/src/features/home/note_provider/note_provider.dart';
 import 'package:second_memory/src/utils/routing/routing.dart';
 
@@ -18,7 +19,7 @@ class HomeScreen extends ConsumerWidget {
               onPressed: () {
                 context.goNamed(AppRoute.archive.name);
               },
-              icon: const Icon(Icons.save))
+              icon: const Icon(Icons.archive))
         ],
       ),
       body: Padding(
@@ -28,11 +29,20 @@ class HomeScreen extends ConsumerWidget {
           itemBuilder: (context, index) {
             final note = notes[index];
             return ListTile(
+              onTap: () {
+                context.goNamed(AppRoute.detail.name,
+                    pathParameters: {'title': note.title});
+              },
               onLongPress: () {
                 ref.read(noteProvider.notifier).deleteNoteFromMain(note);
+                ref.read(archiveProvider.notifier).showArchive();
               },
               title: Text(note.title),
-              subtitle: Text(note.body),
+              subtitle: Text(
+                note.body,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             );
           },
         ),
