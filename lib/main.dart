@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:second_memory/src/constants.dart';
 import 'package:second_memory/src/features/home/model/note_model.dart';
+import 'package:second_memory/src/utils/resources/theme_manager.dart';
 import 'package:second_memory/src/utils/routing/routing.dart';
 
 void main() async {
@@ -21,13 +22,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: routeByName,
-      title: 'Notatnik',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-    );
+        debugShowCheckedModeBanner: false,
+        routerConfig: routeByName,
+        title: 'Notatnik',
+        themeMode: ThemeMode.light,
+        theme: ThemeData(
+            floatingActionButtonTheme:
+                const FloatingActionButtonThemeData().copyWith(
+              iconSize: 40.0,
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colors.white,
+            ),
+            appBarTheme: const AppBarTheme().copyWith(
+              iconTheme: const IconThemeData(color: Colors.white),
+            ),
+            textTheme: const TextTheme().copyWith(
+              bodySmall: const TextStyle(color: Colors.grey),
+              bodyMedium: const TextStyle(color: Colors.white),
+              bodyLarge: const TextStyle(color: Colors.white),
+              labelSmall: const TextStyle(color: Colors.grey),
+              labelMedium: const TextStyle(color: Colors.red),
+              labelLarge: const TextStyle(color: Colors.red),
+              displaySmall: const TextStyle(color: Colors.red),
+              displayMedium: const TextStyle(color: Colors.white),
+              displayLarge: const TextStyle(color: Colors.red),
+            )));
   }
 }
