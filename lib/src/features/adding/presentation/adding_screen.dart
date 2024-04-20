@@ -45,47 +45,56 @@ class AddingScreen extends ConsumerWidget {
               width: double.infinity,
               height: double.infinity,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 50.0,
+            Column(
+              children: [
+                const SizedBox(
+                  height: 100,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 50.0,
+                      ),
+                      TextField(
+                        controller: bodyController,
+                        maxLines: 4,
+                        decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall
+                                    ?.color),
+                            hintText:
+                                'Pierwsze zdanie zakończ kropką. Będzie tytułem notatki.',
+                            border: OutlineInputBorder()),
+                      ),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (bodyController.text.isNotEmpty &&
+                              bodyController.text.contains('.')) {
+                            final title = bodyController.text.split('.')[0];
+                            final body = bodyController.text;
+                            final note = NoteModel(title: title, body: body);
+                            ref.read(noteProvider.notifier).addNote(note);
+                            context.goNamed(AppRoute.home.name);
+                          } else {
+                            if (!bodyController.text.contains('.')) {
+                              _showInfoAboutDot(context);
+                              return;
+                            }
+                          }
+                        },
+                        child: const Text('Zapisz'),
+                      ),
+                    ],
                   ),
-                  TextField(
-                    controller: bodyController,
-                    maxLines: 4,
-                    decoration: InputDecoration(
-                        hintStyle: TextStyle(
-                            color:
-                                Theme.of(context).textTheme.labelSmall?.color),
-                        hintText:
-                            'Pierwsze zdanie zakończ kropką. Będzie tytułem notatki.',
-                        border: OutlineInputBorder()),
-                  ),
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (bodyController.text.isNotEmpty &&
-                          bodyController.text.contains('.')) {
-                        final title = bodyController.text.split('.')[0];
-                        final body = bodyController.text;
-                        final note = NoteModel(title: title, body: body);
-                        ref.read(noteProvider.notifier).addNote(note);
-                        context.goNamed(AppRoute.home.name);
-                      } else {
-                        if (!bodyController.text.contains('.')) {
-                          _showInfoAboutDot(context);
-                          return;
-                        }
-                      }
-                    },
-                    child: const Text('Zapisz'),
-                  ),
-                ],
-              ),
+                ),
+              ],
             )
           ],
         ),

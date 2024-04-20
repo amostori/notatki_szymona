@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:second_memory/src/constants.dart';
 import 'package:second_memory/src/features/home/model/note_model.dart';
-import 'package:second_memory/src/utils/resources/theme_manager.dart';
 import 'package:second_memory/src/utils/routing/routing.dart';
 
 void main() async {
