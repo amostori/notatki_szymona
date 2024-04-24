@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,10 +57,13 @@ class DetailScreen extends ConsumerWidget {
                   const SizedBox(
                     height: 100.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: SingleChildScrollView(
-                        child: note == null ? const Text('') : Text(note.body)),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: SingleChildScrollView(
+                          child:
+                              note == null ? const Text('') : Text(note.body)),
+                    ),
                   ),
                 ],
               )
