@@ -1,7 +1,7 @@
 name: second_memory
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.2+2
+version: 1.0.3+3
 
 environment:
   sdk: '>=3.3.2 <4.0.0'
@@ -10,7 +10,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.6
   flutter_riverpod: ^2.4.10
-  go_router: ^7.0.2
+  go_router: ^14.2.7
   hive_flutter: ^1.1.0
   hive: ^2.2.3
 
@@ -18,9 +18,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
   hive_generator: ^2.0.1
   build_runner: ^2.4.8
+  flutter_native_splash: ^2.4.1
 
 flutter:
 
@@ -28,3 +29,12 @@ flutter:
 
   assets:
     - assets/
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  image: assets/splash.png
+  color: "#F8F7F3"
+  android_12:
+    image: assets/splash.png
+    color: "#F8F7F3"
